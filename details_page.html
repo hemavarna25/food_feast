@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details Page</title>
+    <link rel="icon" href="f.png" type="image/x-icon">
+    <link rel="stylesheet" href="styles9.css">
+    <script>
+        function loadRequests() {
+            const requestList = document.getElementById('request-list');
+            let requests = JSON.parse(localStorage.getItem('requests')) || [];
+
+            requestList.innerHTML = '';
+            requests.forEach((request, index) => {
+                requestList.innerHTML += `
+                    <div class="request-item">
+                        <p><strong>Name:</strong> ${request.name}</p>
+                        <p><strong>Location:</strong> ${request.location}</p>
+                        <button onclick="showMoreDetails(${index})">More Details</button>
+                        <div id="details-${index}" class="more-details" style="display:none;">
+                            <p><strong>Contact:</strong> ${request.contact}</p>
+                            <p><strong>Address:</strong> ${request.address}</p>
+                            <p><strong>Food Type:</strong> ${request.foodType}</p>
+                            <p><strong>Quantity:</strong> ${request.quantity}</p>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function showMoreDetails(index) {
+            const detailsDiv = document.getElementById(`details-${index}`);
+            detailsDiv.style.display = detailsDiv.style.display === 'none' ? 'block' : 'none';
+        }
+
+        window.onload = loadRequests;
+    </script>
+</head>
+<body>
+    <div class="details-page">
+        <h1>Request Details</h1>
+        <div id="request-list"></div>
+    </div>
+</body>
+</html>

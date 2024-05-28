@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decomposition Page</title>
+    <link rel="icon" href="f.png" type="image/x-icon">
+    <link rel="stylesheet" href="styles4.css">
+    <script>
+        function loadDecompositionDetails() {
+            const decompositionList = document.getElementById('decomposition-list');
+            let decompositions = JSON.parse(localStorage.getItem('decompositions')) || [];
+
+            decompositionList.innerHTML = '';
+            if (decompositions.length === 0) {
+                decompositionList.innerHTML = '<p>No foods to decompose.</p>';
+            } else {
+                decompositions.forEach((decomposition, index) => {
+                    decompositionList.innerHTML += `
+                        <div class="decomposition-item">
+                            <p><strong>Donor ${index + 1}</strong></p>
+                            <p><strong>Name:</strong> ${decomposition.name}</p>
+                            <p><strong>Location:</strong> ${decomposition.location}</p>
+                            <p><strong>Contact:</strong> ${decomposition.contact}</p>
+                            <p><strong>Email:</strong> ${decomposition.email}</p>
+                            <p><strong>Address:</strong> ${decomposition.address}</p>
+                            <p><strong>Food Type:</strong> ${decomposition.foodType}</p>
+                            <p><strong>Quantity:</strong> ${decomposition.quantity}</p>
+                        </div>
+                    `;
+                });
+            }
+        }
+
+        window.onload = loadDecompositionDetails;
+    </script>
+</head>
+<body>
+    <div class="decomposition-page">
+        <h1>Decomposition Page</h1>
+        <div id="decomposition-list" class="decomposition-list"></div>
+    </div>
+</body>
+</html>
